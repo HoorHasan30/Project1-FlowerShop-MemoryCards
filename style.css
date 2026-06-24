@@ -31,13 +31,18 @@ header {
 
     background-color: pink;
 
+    border: 8.5px solid #2C1A0F;
     border-radius: 20px;
 
     width: 570px;
     height: 65px;
 
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     color: rgb(245, 205, 212);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #timer {
@@ -90,12 +95,21 @@ main {
 
     width: calc((100% - 20px) / 3);
     height: calc((100% - 30px) / 4);
+
+    color: rgb(245, 205, 212);
+    font-size: 1.5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 /* shop */
 #shop-window {
-    background-color: rgb(214, 236, 238);
+    background-color: rgba(214, 236, 238, 0.552);
 
+    border: 8.5px solid #2C1A0F;
     border-radius: 20px;
 
     width: 570px;
@@ -109,5 +123,14 @@ main {
 }
 
 .vase {
-    width: 150px;
+    width: 130px;
+}
+
+.shelf {
+    height: 10px;
+    width: 95%;
+
+    margin-top: 0;
+
+    border-radius: 8px;
 }
