@@ -45,21 +45,56 @@ header {
     align-items: center;
 }
 
-#timer {
+#game-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+
+    width: 760px;
+}
+
+#game-state{
+    font-size: 2.5rem;
+    color: rgb(111, 185, 99);
+
+    height: 45px;
+}
+
+#timer, #reset {
     background-image: url("./assets/ui/shopBanner.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
     background-color: pink;
 
-    width: 120px;
-    height: 50px;
-
+    border: none;
     border-radius: 20px;
 
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: rgb(245, 205, 212);
+
+    height: 45px;
+}
+
+#timer {
+    width: 120px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#reset {
+    font-family: "Henny Penny", system-ui;
+    width: 175px;
+
+    cursor: pointer;
+}
+
+#reset:disabled {
+    opacity: .5;
+    cursor: not-allowed;
 }
 
 
