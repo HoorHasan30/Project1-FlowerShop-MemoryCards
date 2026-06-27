@@ -7,9 +7,11 @@ const resetE = document.querySelector("#reset")
 // cards
 const cardE = document.querySelectorAll(".card")
 
+// cards side
 const frontE = document.querySelectorAll(".card-front")
 const backE = document.querySelectorAll(".card-back")
 
+// card backside img
 const cardImgsE = document.querySelectorAll(".cardImg")
 
 // vases
@@ -36,7 +38,6 @@ const imgs = [
     "./assets/vases/tulip.png"
 ]
 
-const startTimer = 30
 
 /*---------------------------- Variables (state) ----------------------------*/
 let frontCard
@@ -48,23 +49,29 @@ let matchs = 0
 let seconds = 30
 let timerInterval
 
-let isCounting = false
-
 let winner = false
 
 /*-------------------------------- Functions --------------------------------*/
 function init() {
 
     // reset elements
+    frontCard = null
+    backCard = null
+    
     canFlip = true
     matchs = 0
     winner = false
 
-    clearInterval(timerInterval)
-    resetE.disabled = true
+    seconds = 30
+
+    stateE.textContent = ""
+    stateE.style.color = ""
+
+    clearInterval(timerInterval) // reset timer
+
+    resetE.disabled = true // disable "play again" btn 
 
     getCards()
-
     startTimer()
 }
 
@@ -90,12 +97,39 @@ function getCards() {
     // loop and set the img to the backCard
     cardImgs.forEach(
         function (img, index) {
-            backE[index].src = img
+            cardImgsE[index].src = img
         }
     )
 }
 
 function flipCard(event) {
+
+    const card = event.currentTarget
+
+    if (!canFlip){
+        return
+    }
+    if (card.classList.contains("flipped")){ // check if it is already flipped (have the flipped class)
+        return
+    }
+    
+
+    // filpping logic
+    card.classList.add("flipped")
+     
+    if (frontCard == null){
+        frontCard = event.target
+    }
+    else {
+        if (card === frontCard){
+            return
+        }
+
+        backCard = event.target
+        canFlip = false
+
+        checkForMatch()
+    }
 
 }
 
@@ -106,14 +140,17 @@ function checkForMatch() {
 
 // always updating
 function startTimer() {
-    isCounting = true
-
     timeE.textContent = seconds
 
     timerInterval = setInterval(
         function () {
-            timeE.textContent -= seconds
-            updateMsg()
+            seconds --
+            timeE.textContent = seconds
+           
+            if (seconds === 0) { // check if timer finished
+                clearInterval(timerInterval)
+                updateMsg()
+            }
         },
         1000
     )
@@ -127,6 +164,8 @@ function checkForWin() {
 
 function updateMsg() {
     if (seconds === 0 && !winner) {
+        clearInterval(timerInterval)
+
         stateE.textContent = "Time is Up! You Lose!"
         stateE.style.color = "rgb(199, 68, 68)"
 
