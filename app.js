@@ -40,8 +40,8 @@ const imgs = [
 
 
 /*---------------------------- Variables (state) ----------------------------*/
-let frontCard
-let backCard
+let firstCard
+let secondCard
 
 let canFlip = true
 let matchs = 0
@@ -55,19 +55,19 @@ let winner = false
 function init() {
 
     // reset elements
-    frontCard = null
-    backCard = null
+    firstCard = null
+    secondCard = null
     
     canFlip = true
     matchs = 0
-    winner = false
 
     seconds = 30
+    clearInterval(timerInterval) // reset timer
+
+    winner = false
 
     stateE.textContent = ""
     stateE.style.color = ""
-
-    clearInterval(timerInterval) // reset timer
 
     resetE.disabled = true // disable "play again" btn 
 
@@ -94,7 +94,7 @@ function getCards() {
         }
     )
 
-    // loop and set the img to the backCard
+    // loop and set the img to the card
     cardImgs.forEach(
         function (img, index) {
             cardImgsE[index].src = img
@@ -104,29 +104,28 @@ function getCards() {
 
 function flipCard(event) {
 
-    const card = event.currentTarget
+    const card = event.currentTarget // get the clicked card (whole card)
 
-    if (!canFlip){
+    if (!canFlip){ // check if player can flip a card
         return
     }
     if (card.classList.contains("flipped")){ // check if it is already flipped (have the flipped class)
         return
     }
     
-
     // filpping logic
-    card.classList.add("flipped")
-     
-    if (frontCard == null){
-        frontCard = event.target
+    card.classList.add("flipped") // adding "flipped" class to the flipped card
+
+    if (firstCard == null){
+        firstCard = event.target // set the 1st clicked card to firstCard var if it is null
     }
     else {
-        if (card === frontCard){
+        if (card === firstCard){ // if the same card is re-clicked -> return 
             return
         }
 
-        backCard = event.target
-        canFlip = false
+        secondCard = event.target // set the 2nd card
+        canFlip = false // prevent user from flip until check for match of the 2 clicked cards
 
         checkForMatch()
     }
@@ -136,6 +135,10 @@ function flipCard(event) {
 // called after each 2 flips , if match -> update the vase 
 function checkForMatch() {
 
+    // check if both have the same img 
+        // if so -> keep flipped, match++, canFlip = true, show the vase that have the same type of flowers, call checkForWin
+
+        // if not -> re-flip the card, canFlip = true, return
 }
 
 // always updating
@@ -158,6 +161,8 @@ function startTimer() {
 
 // if matches == 6 -> winner = true
 function checkForWin() {
+    // after every checkForMatch
+    // check if the matches == 6 -> winner = true, call updateMsg()
 
 }
 
@@ -191,5 +196,3 @@ resetE.addEventListener('click', init)
 cardE.forEach(
     card => card.addEventListener('click', flipCard)
 )
-
-console.log(backE)
