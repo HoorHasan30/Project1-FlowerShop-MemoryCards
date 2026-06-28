@@ -23,20 +23,20 @@ const sunflowerE = document.querySelector("#sunflower")
 const tulipE = document.querySelector("#tulip")
 
 /*-------------------------------- Constants --------------------------------*/
-// const imgs = [
-//     "./assets/vases/daisy.png",
-//     "./assets/vases/daisy.png",
-//     "./assets/vases/dan.png",
-//     "./assets/vases/dan.png",
-//     "./assets/vases/lavender.png",
-//     "./assets/vases/lavender.png",
-//     "./assets/vases/mix.png",
-//     "./assets/vases/mix.png",
-//     "./assets/vases/sunflower.png",
-//     "./assets/vases/sunflower.png",
-//     "./assets/vases/tulip.png",
-//     "./assets/vases/tulip.png"
-// ]
+const imgs = [
+    "./assets/flowers/daisy.png",
+    "./assets/flowers/daisy.png",
+    "./assets/flowers/dan.png",
+    "./assets/flowers/dan.png",
+    "./assets/flowers/lavender.png",
+    "./assets/flowers/lavender.png",
+    "./assets/flowers/mix.png",
+    "./assets/flowers/mix.png",
+    "./assets/flowers/sunflower.png",
+    "./assets/flowers/sunflower.png",
+    "./assets/flowers/tulip.png",
+    "./assets/flowers/tulip.png"
+]
 
 const vases = [
     "./assets/vases/Vdaisy.png",
