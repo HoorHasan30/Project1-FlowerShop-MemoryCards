@@ -186,8 +186,8 @@ main {
 }
 
 .card-back img {
-    width: 35%;
-    height: 100%;
+    width: 120%;
+    height: 120%;
     margin-bottom: 12px;
 }
 
