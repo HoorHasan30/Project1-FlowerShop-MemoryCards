@@ -23,21 +23,29 @@ const sunflowerE = document.querySelector("#sunflower")
 const tulipE = document.querySelector("#tulip")
 
 /*-------------------------------- Constants --------------------------------*/
-const imgs = [
-    "./assets/vases/daisy.png",
-    "./assets/vases/daisy.png",
-    "./assets/vases/dan.png",
-    "./assets/vases/dan.png",
-    "./assets/vases/lavender.png",
-    "./assets/vases/lavender.png",
-    "./assets/vases/mix.png",
-    "./assets/vases/mix.png",
-    "./assets/vases/sunflower.png",
-    "./assets/vases/sunflower.png",
-    "./assets/vases/tulip.png",
-    "./assets/vases/tulip.png"
-]
+// const imgs = [
+//     "./assets/vases/daisy.png",
+//     "./assets/vases/daisy.png",
+//     "./assets/vases/dan.png",
+//     "./assets/vases/dan.png",
+//     "./assets/vases/lavender.png",
+//     "./assets/vases/lavender.png",
+//     "./assets/vases/mix.png",
+//     "./assets/vases/mix.png",
+//     "./assets/vases/sunflower.png",
+//     "./assets/vases/sunflower.png",
+//     "./assets/vases/tulip.png",
+//     "./assets/vases/tulip.png"
+// ]
 
+const vases = [
+    "./assets/vases/Vdaisy.png",
+    "./assets/vases/Vdan.png",
+    "./assets/vases/Vlavender.png",
+    "./assets/vases/Vmix.png",
+    "./assets/vases/Vsunflower.png",
+    "./assets/vases/Vtulip.png"
+]
 
 /*---------------------------- Variables (state) ----------------------------*/
 let firstCard
