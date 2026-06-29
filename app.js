@@ -15,12 +15,12 @@ const backE = document.querySelectorAll(".card-back")
 const cardImgsE = document.querySelectorAll(".cardImg")
 
 // vases
-const daisyE = document.querySelector("#daisy")
-const danE = document.querySelector("#dan")
-const lavenderE = document.querySelector("#lavender")
-const mixE = document.querySelector("#mix")
-const sunflowerE = document.querySelector("#sunflower")
-const tulipE = document.querySelector("#tulip")
+const Edaisy = document.querySelector("#daisy")
+const Edan = document.querySelector("#dan")
+const Elavender = document.querySelector("#lavender")
+const Emix = document.querySelector("#mix")
+const Esunflower = document.querySelector("#sunflower")
+const Etulip = document.querySelector("#tulip")
 
 /*-------------------------------- Constants --------------------------------*/
 const imgs = [
@@ -45,6 +45,15 @@ const vases = [
     "./assets/vases/Vmix.png",
     "./assets/vases/Vsunflower.png",
     "./assets/vases/Vtulip.png"
+]
+
+const vasesElement = [
+    Edaisy,
+    Edan,
+    Elavender,
+    Emix,
+    Esunflower,
+    Etulip
 ]
 
 /*---------------------------- Variables (state) ----------------------------*/
@@ -81,7 +90,10 @@ function init() {
 
     resetE.disabled = true // disable "play again" btn 
 
-    //backE.children[0].classList.remove("matched")
+    //reset vases
+    vasesElement.forEach(
+        vase => vase.src = "./assets/vases/Vempty.png"
+    )
 
     getCards()
     startTimer()
@@ -180,6 +192,7 @@ function checkForMatch(event) {
 
         if (firstImg == secImg){
             console.log('in if')
+            console.log(firstImg)
             setTimeout(
                 () => {
                     firstCardBack.classList.add("matched")
@@ -188,6 +201,7 @@ function checkForMatch(event) {
                     matchs ++
                     
                     // show vases 
+                    showVase(firstImg)
 
                     firstCard = null
                     secondCard = null
@@ -214,6 +228,22 @@ function checkForMatch(event) {
                 ,500
             )
         }
+}
+
+function showVase(img){
+    const flowerSrc = img.split("/"); //split img src 
+    let flower = flowerSrc.pop(); // take the last elemnt in the array of strings
+
+    let vaseSrc = `./assets/vases/V${flower}` // set the vase src
+
+    console.log(flower)
+    console.log(vaseSrc)
+
+    let vaseImgIndex = vases.indexOf(vaseSrc); // find the vaseSrc exist in the array of vases
+    console.log(vaseImgIndex)
+    if(vaseImgIndex !== null || vaseImgIndex !== undefined ){ // if exist
+        vasesElement[vaseImgIndex].src = vaseSrc // take the 
+    }
 }
 
 // if matches == 6 -> winner = true
