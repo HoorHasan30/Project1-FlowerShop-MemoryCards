@@ -191,6 +191,10 @@ main {
     margin-bottom: 12px;
 }
 
+.card-back.matched {
+  border: 4px solid #509933;
+}
+
 /* shop */
 #shop-window {
     background-color: rgba(214, 236, 238, 0.396);
