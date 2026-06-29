@@ -1,15 +1,19 @@
 /*------------------------ Cached Element References ------------------------*/
+// Modal
+const modalE = document.querySelector("#modal")
+const stateE = document.querySelector("#game-state-modal")
+const matchesE = document.querySelector("#numOfMatches")
+const starsE = document.querySelector("#star-rating")
+const secE = document.querySelector("#numOfSec")
+
+const resetE = document.querySelector("#reset-modal")
+
+
 // haeder 
 const timeE = document.querySelector("#time")
-const stateE = document.querySelector("#game-state")
-const resetE = document.querySelector("#reset")
 
 // cards
 const cardE = document.querySelectorAll(".card")
-
-// cards side
-const frontE = document.querySelectorAll(".card-front")
-const backE = document.querySelectorAll(".card-back")
 
 // card backside img
 const cardImgsE = document.querySelectorAll(".cardImg")
@@ -85,15 +89,12 @@ function init() {
 
     winner = false
 
-    stateE.textContent = ""
-    stateE.style.color = ""
-
-    resetE.disabled = true // disable "play again" btn 
-
     //reset vases
     vasesElement.forEach(
         vase => vase.src = "./assets/vases/Vempty.png"
     )
+
+    modalE.style.display = "none" // hide the modal
 
     getCards()
     startTimer()
@@ -108,7 +109,7 @@ function getCards() {
             card.children[1].classList.remove("matched")
         }
     )
-    
+
     // create a copy of img array
     const cardImgs = imgs.map(img => img)
 
@@ -133,15 +134,16 @@ function startTimer() {
 
     timerInterval = setInterval(
         function () {
-            seconds --
+            seconds--
             timeE.textContent = seconds
-           
+
             if (seconds === 0) { // check if timer finished
                 clearInterval(timerInterval)
-                updateMsg()
+                showModal()
+                //updateMsg()
             }
         }
-        ,1000
+        , 1000
     )
 }
 
@@ -149,24 +151,24 @@ function flipCard(event) {
 
     theCard = event.currentTarget // get the clicked card (whole card)
 
-    if (!canFlip){ // check if player can flip a card
+    if (!canFlip) { // check if player can flip a card
         return
     }
-    if (theCard.classList.contains("flipped")){ // check if it is already flipped (have the flipped class)
+    if (theCard.classList.contains("flipped")) { // check if it is already flipped (have the flipped class)
         return
     }
-    if (theCard.classList.contains("matched")){ // check if the card is already matched to another card
+    if (theCard.classList.contains("matched")) { // check if the card is already matched to another card
         return
     }
-    
+
     // filpping logic
     theCard.classList.add("flipped") // adding "flipped" class to the flipped card
 
-    if (firstCard == null){
+    if (firstCard == null) {
         firstCard = theCard // set the 1st clicked card to firstCard var if it is null
     }
     else {
-        if (theCard === firstCard){ // if the same card is re-clicked -> return 
+        if (theCard === firstCard) { // if the same card is re-clicked -> return 
             return
         }
 
@@ -183,54 +185,54 @@ function checkForMatch(event) {
 
     console.log('check function')
     // check if both have the same img 
-        // if so -> keep flipped, match++, canFlip = true, reset cards, show the vase that have the same type of flowers, call checkForWin
-        let firstCardBack = firstCard.children[1]
-        let secondCardBack = secondCard.children[1]
-        
-        let firstImg = firstCard.children[1].children[0].src
-        let secImg = secondCard.children[1].children[0].src
+    // if so -> keep flipped, match++, canFlip = true, reset cards, show the vase that have the same type of flowers, call checkForWin
+    let firstCardBack = firstCard.children[1]
+    let secondCardBack = secondCard.children[1]
 
-        if (firstImg == secImg){
-            console.log('in if')
-            console.log(firstImg)
-            setTimeout(
-                () => {
-                    firstCardBack.classList.add("matched")
-                    secondCardBack.classList.add("matched")
+    let firstImg = firstCard.children[1].children[0].src
+    let secImg = secondCard.children[1].children[0].src
 
-                    matchs ++
-                    
-                    // show vases 
-                    showVase(firstImg)
+    if (firstImg == secImg) {
+        console.log('in if')
+        console.log(firstImg)
+        setTimeout(
+            () => {
+                firstCardBack.classList.add("matched")
+                secondCardBack.classList.add("matched")
 
-                    firstCard = null
-                    secondCard = null
-                    canFlip = true
+                matchs++
 
-                    checkForWin()
-                }
-                ,
-            )
-        }
-        // if not -> re-flip the card, canFlip = true, reset cards
-        else{
-            console.log('else')
-            setTimeout(
-                () => {
-                    // re-flip the cards
-                    firstCard.classList.remove("flipped")
-                    secondCard.classList.remove("flipped")
+                // show vases 
+                showVase(firstImg)
 
-                    firstCard = null
-                    secondCard = null
-                    canFlip = true
-                }
-                ,500
-            )
-        }
+                firstCard = null
+                secondCard = null
+                canFlip = true
+
+                checkForWin()
+            }
+            , 500
+        )
+    }
+    // if not -> re-flip the card, canFlip = true, reset cards
+    else {
+        console.log('else')
+        setTimeout(
+            () => {
+                // re-flip the cards
+                firstCard.classList.remove("flipped")
+                secondCard.classList.remove("flipped")
+
+                firstCard = null
+                secondCard = null
+                canFlip = true
+            }
+            ,500
+        )
+    }
 }
 
-function showVase(img){
+function showVase(img) {
     const flowerSrc = img.split("/"); //split img src 
     let flower = flowerSrc.pop(); // take the last elemnt in the array of strings
 
@@ -241,7 +243,7 @@ function showVase(img){
 
     let vaseImgIndex = vases.indexOf(vaseSrc); // find the vaseSrc exist in the array of vases
     console.log(vaseImgIndex)
-    if(vaseImgIndex !== null || vaseImgIndex !== undefined ){ // if exist
+    if (vaseImgIndex !== null || vaseImgIndex !== undefined) { // if exist
         vasesElement[vaseImgIndex].src = vaseSrc // take the 
     }
 }
@@ -250,35 +252,61 @@ function showVase(img){
 function checkForWin() {
     // after every checkForMatch
     // check if the matches == 6 -> winner = true, call updateMsg()
-    if (matchs == 6){
+    if (matchs == 6) {
         winner = true
-        clearInterval(timerInterval)
-        updateMsg()
+        showModal()
     }
 }
 
-function updateMsg() {
-    if (seconds === 0 && !winner) {
-        clearInterval(timerInterval)
+function showModal() {
+    let numOfSeconds = 45 - seconds
+    clearInterval(timerInterval) // stop the timer
 
-        stateE.textContent = "Time is Up! You Lose!"
-        stateE.style.color = "rgb(199, 68, 68)"
+    if (winner){
+        stateE.textContent = "You Win!"
+        stateE.style.color = "rgb(62, 125, 52)"
 
-        canFlip = false
-        resetE.disabled = false
+        starsE.textContent = "★★★"
+
+        matchesE.textContent = matchs
+        secE.textContent = numOfSeconds
     }
     else {
-        stateE.textContent = "You Win!"
-        stateE.style.color = "rgb(111, 185, 99)"
+        if (matchs < 2) {
+            stateE.textContent = "Time is Up!"
+            stateE.style.color = "rgb(199, 68, 68)"
 
-        canFlip = false
-        resetE.disabled = false
+            starsE.textContent = ""
+
+            matchesE.textContent = matchs
+            secE.textContent = numOfSeconds
+        }
+        else if (matchs < 4) {
+            stateE.textContent = "Try Next Time!"
+            stateE.style.color = "rgb(244, 217, 39)"
+
+            starsE.textContent = "★"
+
+            matchesE.textContent = matchs
+            secE.textContent = numOfSeconds
+        }
+        else {
+            stateE.textContent = "Good Work!"
+            stateE.style.color = "rgb(244, 217, 39)"
+
+            starsE.textContent = "★★"
+
+            matchesE.textContent = matchs
+            secE.textContent = numOfSeconds
+        }
     }
+
+    canFlip = false
+    modalE.style.display = "flex"
 }
 
+
 init()
-
-
 /*----------------------------- Event Listeners -----------------------------*/
 resetE.addEventListener('click', init)
 

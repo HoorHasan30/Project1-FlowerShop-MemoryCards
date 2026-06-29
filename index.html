@@ -20,8 +20,8 @@
             </div>
             <div id="game-banner">
                 <div id="timer"><span id="time">30</span>s</div>
-                <div id="game-state">You Win!</div>
-                <button id="reset" disabled>↻ Play Again</button>
+                <!-- <div id="game-state">You Win!</div> -->
+                <!-- <button id="reset" disabled>↻ Play Again</button> -->
             </div>
         </div>
     </header>
@@ -137,6 +137,25 @@
                 </div>
             </section>
         </div>
+
+        <!-- Modal Container -->
+         <div id="modal">
+            <div id="modal-content">
+                <div id="modal-text"> 
+                    <h2 id="game-state-modal">You Win!</h2>
+
+                    <div id="stars-container">
+                        <p id="star-rating"></p>
+                    </div>
+                    
+                    <div id="details">
+                        <p id="matches">~ <span id="numOfMatches">0</span>/6 Matches ~</p>
+                        <p id="time-consumed">~ In <span id="numOfSec">0</span> Seconds ~</p>
+                    </div>
+                </div>
+                <button id="reset-modal">↻ Play Again</button>
+            </div>
+         </div>
     </main>
 </body>
 </html>

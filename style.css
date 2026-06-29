@@ -10,17 +10,151 @@ body {
     background-color: rgb(251, 247, 240);
 }
 
+
+/* Modal */
+#modal {
+    /* display: none; */
+    background-color: rgba(101, 101, 101, 0.458);
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+}
+
+#modal-content {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: rgb(251, 247, 240);
+
+    box-shadow: 0 4px rgba(109, 97, 89, 0.949);
+    /* border: 6px solid rgb(171, 121, 128); */
+     border: 6px solid #2C1A0F;
+    border-radius: 20px;
+
+    width: 22%;
+    height: 65%;
+
+    box-sizing: border-box;
+    padding: 15px;
+}
+
+#modal-text {
+    color: rgb(0, 0, 0);
+    line-height: 0.3;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+}
+
+#game-state-modal{
+    font-size: 2.5rem;
+    color: rgb(62, 125, 52);
+}
+
+#star-rating{
+    font-size: 3rem;
+    color: rgb(246, 238, 183);
+    line-height: .0;
+}
+
+#stars-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    background-color:rgb(245, 205, 212);
+    
+    box-shadow: 0 4px rgba(109, 97, 89, 0.686);
+    border: 1px solid rgb(211, 189, 193);
+    border-radius: 40px;
+
+    height: 20%;
+    width: 65%;
+}
+
+#details{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+
+    line-height: 0.25;
+
+    margin-top: 10px;
+}
+
+#matches{
+    font-size: 1rem;
+    color: #2C1A0F;
+}
+
+#numOfMatches{
+    font-size: 2rem;
+    color: rgb(245, 205, 212);
+}
+
+#numOfSec {
+    font-size: 2rem;
+    color: rgb(245, 205, 212);
+}
+
+#reset-modal {
+    background-image: url("./assets/ui/shopBanner.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgb(254, 229, 233);
+
+    font-family: "Henny Penny", system-ui;
+
+    border: none;
+    box-shadow: 0 4px #b1a095a8;
+    border-radius: 25px;
+
+    font-size: 1.2rem;
+    color: rgb(245, 205, 212);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 65%;
+    height: 10%;
+}
+
+#reset-modal:hover {
+    cursor: pointer;
+}
+
+/* Header */
+header {
+    margin: 15px 70px;
+}
+
 #header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     text-align: center;
-}
-
-/* Header */
-header {
-    margin: 15px 70px;
 }
 
 #shop-banner {
@@ -48,22 +182,14 @@ header {
 
 #game-banner {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-direction: row-reverse;
 
     width: 760px;
 }
 
-#game-state {
-    font-size: 2.5rem;
-    color: rgb(111, 185, 99);
-
-    height: 45px;
-}
-
-#timer,
-#reset {
+#timer{
     background-image: url("./assets/ui/shopBanner.png");
     background-size: cover;
     background-position: center;
@@ -78,9 +204,6 @@ header {
     color: rgb(245, 205, 212);
 
     height: 45px;
-}
-
-#timer {
     width: 120px;
 
     display: flex;
@@ -88,23 +211,6 @@ header {
     align-items: center;
 }
 
-#reset {
-    font-family: "Henny Penny", system-ui;
-    width: 175px;
-}
-
-#reset:hover {
-    cursor: pointer;
-}
-
-#reset:disabled {
-    opacity: .5;
-    cursor: not-allowed;
-}
-
-#reset:disabled:hover {
-    cursor: not-allowed;
-}
 
 /* Main */
 main {
@@ -192,7 +298,7 @@ main {
 }
 
 .card-back.matched {
-  border: 4px solid #509933;
+  border: 4px solid rgb(62, 125, 52);
 }
 
 /* shop */
