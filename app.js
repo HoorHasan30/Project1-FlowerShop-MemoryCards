@@ -110,6 +110,24 @@ function getCards() {
     )
 }
 
+// always updating
+function startTimer() {
+    timeE.textContent = seconds
+
+    timerInterval = setInterval(
+        function () {
+            seconds --
+            timeE.textContent = seconds
+           
+            if (seconds === 0) { // check if timer finished
+                clearInterval(timerInterval)
+                updateMsg()
+            }
+        },
+        1000
+    )
+}
+
 function flipCard(event) {
 
     const card = event.currentTarget // get the clicked card (whole card)
@@ -149,31 +167,12 @@ function checkForMatch() {
         // if not -> re-flip the card, canFlip = true, return
 }
 
-// always updating
-function startTimer() {
-    timeE.textContent = seconds
-
-    timerInterval = setInterval(
-        function () {
-            seconds --
-            timeE.textContent = seconds
-           
-            if (seconds === 0) { // check if timer finished
-                clearInterval(timerInterval)
-                updateMsg()
-            }
-        },
-        1000
-    )
-}
-
 // if matches == 6 -> winner = true
 function checkForWin() {
     // after every checkForMatch
     // check if the matches == 6 -> winner = true, call updateMsg()
 
 }
-
 
 function updateMsg() {
     if (seconds === 0 && !winner) {
