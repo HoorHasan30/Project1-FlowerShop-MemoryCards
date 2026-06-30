@@ -21,6 +21,13 @@ const exitGameBtn = document.querySelector("#exit-main")
 // score modal
 const scoreBtn = document.querySelectorAll(".score") // in start modal & end modal
 
+const board = document.querySelector("#score-board")
+
+const playerNumE = document.querySelectorAll(".score-num")
+const playerE = document.querySelectorAll(".player");
+const playerScoreE = document.querySelectorAll(".score-match")
+const playerSecE = document.querySelectorAll(".score-sec")
+
 const scoreModalE = document.querySelector("#score-modal")
 const exitScoreE = document.querySelector("#exit-modal-btn")
 
@@ -87,6 +94,7 @@ let matchs = 0
 
 let seconds = 45
 let timerInterval
+let numOfSeconds
 
 let winner = false
 
@@ -95,7 +103,7 @@ function init(){
     startModalE.style.display = "flex"
 
     scoreModalE.style.display = "none"
-    endModalE.style.display = "flex"
+    endModalE.style.display = "none"
 }
 
 function startGame() {
@@ -294,7 +302,7 @@ function checkForWin() {
 }
 
 function showEndingModal() {
-    let numOfSeconds = 45 - seconds
+    numOfSeconds = 45 - seconds
     clearInterval(timerInterval) // stop the timer
 
     if (winner){
@@ -302,6 +310,11 @@ function showEndingModal() {
         stateE.style.color = "rgb(62, 125, 52)"
 
         starsE.textContent = "★★★"
+        
+        if(checkIfHighScore){
+        addToScoreBoard()
+
+        }
 
         matchesE.textContent = matchs
         secE.textContent = numOfSeconds
@@ -339,6 +352,63 @@ function showEndingModal() {
     pauseBtnE.disabled = true
     canFlip = false
     endModalE.style.display = "flex"
+}
+
+function checkIfHighScore(){
+
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) // create an array for the leaderboard objects
+    const isHighScore = leaderboard.some((score)=>{numOfSeconds > score.seconds}) // check if the player score is hogher than any score in the array
+    console.log(`made leaderboard ${isHighScore}`) // true if higher than a score, falsr if lower 
+
+    return isHighScore
+}
+
+function addToScoreBoard(){ // called only if player made it to the leaderboard
+
+    // let indexChild1 = 0
+    // let indexChild2 = 0
+
+    // // score board elements 
+    // let place = board.children[indexChild1].children[0]
+    // let PlayerName = board.children[indexChild1].children[1]
+    // let playeMatchs = board.children[indexChild1].children[2]
+    // let playerSec = board.children[indexChild1].children[3]
+
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) //get the leaderboard array
+    let name = prompt('Give your name') // prompt player to enter his name
+
+    // add the players score into the array
+    leaderboard.push({
+        name,
+        seconds: numOfSeconds,
+        matches: matchs
+    })
+
+    leaderboard.sort((a,b)=>b.score - b.score) // sort from higest to lowest
+    if(leaderboard.lenngth >= 5) leaderboard.pop() // remove the last element (keep only 5 in the array)
+
+    console.log("NEW High scores " + leaderboard)
+
+    localStorage.setItem('leaderboard',JSON.stringify(leaderboard)) // add array to localStorage
+
+    // loop through the array to display the scores into the score board
+    // leaderboard.forEach( // looping through the array (whole object)
+    //     scoreObject => {
+
+    //         scoreObject.forEach( // looping through the object
+    //             data => {
+    //                 place.textContent = indexChild1 + 1
+    //                 PlayerName.textContent = name
+    //                 playeMatchs.textContent = matchs
+    //                 playerSec.textContent = numOfSeconds 
+    //             }
+    //         )
+    //         indexChild1 ++
+    //     }
+    // )
+
+    // display higest 5 scores that have the least numOfSeconds
+
 }
 
 // Pause Game
