@@ -1,5 +1,8 @@
 /*------------------------ Cached Element References ------------------------*/
 // Modal
+const startModalE = document.querySelector("#start-modal")
+const startBtnE = document.querySelector("#start")
+
 const pauseModalE = document.querySelector("#pause-modal")
 const pauseBtnE = document.querySelector("#pause")
 const resumeBtnE = document.querySelector("#resume")
@@ -81,6 +84,15 @@ let timerInterval
 let winner = false
 
 /*-------------------------------- Functions --------------------------------*/
+function startGame() {
+    // hide all modals
+    startModalE.style.display = "none"
+    endModalE.style.display = "none" 
+    pauseModalE.style.display = "none" 
+
+    init() // call game init
+}
+
 function init() {
 
     // reset elements
@@ -100,8 +112,10 @@ function init() {
         vase => vase.src = "./assets/vases/Vempty.png"
     )
 
+    startModalE.style.display = "none"
     endModalE.style.display = "none" // hide the modal
     pauseModalE.style.display = "none" //hide the modal
+    
 
     getCards()
     startTimer()
@@ -307,6 +321,7 @@ function showEndingModal() {
         }
     }
 
+    pauseBtnE.disabled = true
     canFlip = false
     endModalE.style.display = "flex"
 }
@@ -323,23 +338,24 @@ function showPauseModal(){
 function resumeGame(){
     //resume the timer
     startTimer()
-    
+
     //hide the modal
     pauseModalE.style.display = "none"
 }
 
 function exitGame(){
     // stop timer
+    clearInterval(timerInterval)
 
     // hide modal
     pauseModalE.style.display = "none"
 
     // show game start modal
+    startModalE.style.display = "flex"
 }
 
-
-init()
 /*----------------------------- Event Listeners -----------------------------*/
+startBtnE.addEventListener('click', startGame)
 pauseBtnE.addEventListener('click', showPauseModal)
 resumeBtnE.addEventListener('click', resumeGame)
 exitBtnE.addEventListener('click', exitGame)
