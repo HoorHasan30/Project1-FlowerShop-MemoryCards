@@ -3,6 +3,7 @@
 const startModalE = document.querySelector("#start-modal")
 const startBtnE = document.querySelector("#start")
 
+// Pause Modal
 const pauseModalE = document.querySelector("#pause-modal")
 const pauseBtnE = document.querySelector("#pause")
 const resumeBtnE = document.querySelector("#resume")
@@ -14,8 +15,14 @@ const stateE = document.querySelector("#game-state-modal")
 const matchesE = document.querySelector("#numOfMatches")
 const starsE = document.querySelector("#star-rating")
 const secE = document.querySelector("#numOfSec")
-
 const resetE = document.querySelector("#reset-modal")
+const exitGameBtn = document.querySelector("#exit-main")
+
+// score modal
+const scoreBtn = document.querySelectorAll(".score") // in start modal & end modal
+
+const scoreModalE = document.querySelector("#score-modal")
+const exitScoreE = document.querySelector("#exit-modal-btn")
 
 
 // haeder 
@@ -84,16 +91,25 @@ let timerInterval
 let winner = false
 
 /*-------------------------------- Functions --------------------------------*/
+function init(){
+    startModalE.style.display = "flex"
+
+    scoreModalE.style.display = "none"
+    endModalE.style.display = "flex"
+}
+
 function startGame() {
+
     // hide all modals
     startModalE.style.display = "none"
     endModalE.style.display = "none" 
     pauseModalE.style.display = "none" 
+    scoreModalE.style.display = "none"
 
-    init() // call game init
+    initGame() // call game init
 }
 
-function init() {
+function initGame() {
 
     // reset elements
     firstCard = null
@@ -116,7 +132,6 @@ function init() {
     endModalE.style.display = "none" // hide the modal
     pauseModalE.style.display = "none" //hide the modal
     
-
     getCards()
     startTimer()
 }
@@ -349,16 +364,34 @@ function exitGame(){
 
     // hide modal
     pauseModalE.style.display = "none"
+    endModalE.style.display = "none"
 
     // show game start modal
     startModalE.style.display = "flex"
 }
+
+function showScore(){
+    scoreModalE.style.display = "flex"
+}
+
+function exitScore(){
+    scoreModalE.style.display = "none"
+}
+
+init()
 
 /*----------------------------- Event Listeners -----------------------------*/
 startBtnE.addEventListener('click', startGame)
 pauseBtnE.addEventListener('click', showPauseModal)
 resumeBtnE.addEventListener('click', resumeGame)
 exitBtnE.addEventListener('click', exitGame)
+
+exitGameBtn.addEventListener('click', exitGame)
+
+scoreBtn.forEach(
+    btn => btn.addEventListener('click', showScore)
+)
+exitScoreE.addEventListener('click', exitScore)
 
 resetE.addEventListener('click', init)
 

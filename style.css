@@ -58,10 +58,37 @@ body {
     align-items: center;
 
     width: 100%;
+    margin-bottom: 10px;
 }
 
 
 .btn{
+    background-image: url("./assets/ui/shopBanner.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgb(254, 229, 233);
+
+    font-family: "Henny Penny", system-ui;
+
+    border: none;
+    box-shadow: 0 4px #b1a095a8;
+    border-radius: 25px;
+
+    font-size: 1rem;
+    color: rgb(245, 205, 212);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 65%;
+    height: 10%;
+
+    margin-bottom: 12px;
+}
+
+.btnP{
     background-image: url("./assets/ui/shopBanner.png");
     background-size: cover;
     background-position: center;
@@ -99,7 +126,7 @@ body {
     height: 100%;
     width: 100%;
 
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 
@@ -136,13 +163,14 @@ body {
     align-items: center;
 
     width: 100%;
-    height: 50%;
+    height: 45%;
 }
 
-#start{
+.start-modal-btn{
     width: 15%;
     height: 8%;
     font-size: 1.5rem;
+    margin: 10px;
 }
 
 /* Pause Modal */
@@ -213,6 +241,113 @@ body {
     color: rgb(245, 205, 212);
 }
 
+/* Score Board */
+.score-content{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: rgb(251, 247, 240);
+
+    box-shadow: 0 4px rgba(109, 97, 89, 0.949);
+    /* border: 6px solid rgb(171, 121, 128); */
+    border: 6px solid #2C1A0F;
+    border-radius: 20px;
+
+    width: 35%;
+    height: 70%;
+
+    box-sizing: border-box;
+    padding: 15px;
+
+    color:#2C1A0F;
+}
+
+#main-content-score{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: 80%;
+}
+
+.score-board{
+    width: 100%;
+}
+
+.data{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 100%;
+
+    margin: 4px;
+}
+
+.score-num, .player, .score-match, .score-sec{
+    border: 3px solid rgb(245, 205, 212);
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+
+    height: 25px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1rem;
+}
+
+.player{
+    width: 65%;
+}
+
+.score-num, .score-match, .score-sec {
+    width: 6%;
+}
+
+.exit-modal{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#exit-modal-btn{
+    background-image: url("./assets/ui/shopBanner.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgb(254, 229, 233);
+
+    font-family: "Henny Penny", system-ui;
+
+    border: none;
+    box-shadow: 0 4px #b1a095a8;
+    border-radius: 25px;
+
+    font-size: 1.2rem;
+    color: rgb(245, 205, 212);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 25%;
+}
+
+#exit-modal-btn:hover{
+    cursor: pointer;
+}
 
 /* Header */
 header {
