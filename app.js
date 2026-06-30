@@ -1,6 +1,12 @@
 /*------------------------ Cached Element References ------------------------*/
 // Modal
-const modalE = document.querySelector("#modal")
+const pauseModalE = document.querySelector("#pause-modal")
+const pauseBtnE = document.querySelector("#pause")
+const resumeBtnE = document.querySelector("#resume")
+const exitBtnE = document.querySelector("#exit")
+
+// end Modal
+const endModalE = document.querySelector("#end-modal")
 const stateE = document.querySelector("#game-state-modal")
 const matchesE = document.querySelector("#numOfMatches")
 const starsE = document.querySelector("#star-rating")
@@ -94,7 +100,8 @@ function init() {
         vase => vase.src = "./assets/vases/Vempty.png"
     )
 
-    modalE.style.display = "none" // hide the modal
+    endModalE.style.display = "none" // hide the modal
+    pauseModalE.style.display = "none" //hide the modal
 
     getCards()
     startTimer()
@@ -139,8 +146,7 @@ function startTimer() {
 
             if (seconds === 0) { // check if timer finished
                 clearInterval(timerInterval)
-                showModal()
-                //updateMsg()
+                showEndingModal()
             }
         }
         , 1000
@@ -254,11 +260,11 @@ function checkForWin() {
     // check if the matches == 6 -> winner = true, call updateMsg()
     if (matchs == 6) {
         winner = true
-        showModal()
+        showEndingModal()
     }
 }
 
-function showModal() {
+function showEndingModal() {
     let numOfSeconds = 45 - seconds
     clearInterval(timerInterval) // stop the timer
 
@@ -302,14 +308,43 @@ function showModal() {
     }
 
     canFlip = false
-    modalE.style.display = "flex"
+    endModalE.style.display = "flex"
+}
+
+// Pause Game
+function showPauseModal(){
+    //stop the timer
+    clearInterval(timerInterval)
+
+    //show the modal
+    pauseModalE.style.display = "flex"
+}
+
+function resumeGame(){
+    //resume the timer
+    startTimer()
+    
+    //hide the modal
+    pauseModalE.style.display = "none"
+}
+
+function exitGame(){
+    // stop timer
+
+    // hide modal
+    pauseModalE.style.display = "none"
+
+    // show game start modal
 }
 
 
 init()
 /*----------------------------- Event Listeners -----------------------------*/
-resetE.addEventListener('click', init)
+pauseBtnE.addEventListener('click', showPauseModal)
+resumeBtnE.addEventListener('click', resumeGame)
+exitBtnE.addEventListener('click', exitGame)
 
+resetE.addEventListener('click', init)
 
 cardE.forEach(
     card => card.addEventListener('click', flipCard)
