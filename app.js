@@ -365,15 +365,6 @@ function checkIfHighScore(){
 
 function addToScoreBoard(){ // called only if player made it to the leaderboard
 
-    // let indexChild1 = 0
-    // let indexChild2 = 0
-
-    // // score board elements 
-    // let place = board.children[indexChild1].children[0]
-    // let PlayerName = board.children[indexChild1].children[1]
-    // let playeMatchs = board.children[indexChild1].children[2]
-    // let playerSec = board.children[indexChild1].children[3]
-
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) //get the leaderboard array
     let name = prompt('Give your name') // prompt player to enter his name
 
@@ -384,31 +375,40 @@ function addToScoreBoard(){ // called only if player made it to the leaderboard
         matches: matchs
     })
 
-    leaderboard.sort((a,b)=>b.score - b.score) // sort from higest to lowest
+    leaderboard.sort((a,b) => a.seconds - b.seconds) // sort from higest to lowest
     if(leaderboard.lenngth >= 5) leaderboard.pop() // remove the last element (keep only 5 in the array)
 
     console.log("NEW High scores " + leaderboard)
 
     localStorage.setItem('leaderboard',JSON.stringify(leaderboard)) // add array to localStorage
 
-    // loop through the array to display the scores into the score board
-    // leaderboard.forEach( // looping through the array (whole object)
-    //     scoreObject => {
-
-    //         scoreObject.forEach( // looping through the object
-    //             data => {
-    //                 place.textContent = indexChild1 + 1
-    //                 PlayerName.textContent = name
-    //                 playeMatchs.textContent = matchs
-    //                 playerSec.textContent = numOfSeconds 
-    //             }
-    //         )
-    //         indexChild1 ++
-    //     }
-    // )
-
     // display higest 5 scores that have the least numOfSeconds
+    displayScoreBoard()
 
+}
+
+function displayScoreBoard(){
+
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) //get the leaderboard array
+    leaderboard.sort((a,b) => a.seconds - b.seconds)
+
+    // looping through the array to display
+    for (let i = 0; i < 5; i++){
+
+        if (leaderboard[i]) { // if there is a data in the leaderboard for the index
+            playerNumE[i].textContent = i + 1;
+            playerE[i].textContent = leaderboard[i].name;
+            playerScoreE[i].textContent = leaderboard[i].matches + "/6";
+            playerSecE[i].textContent = leaderboard[i].seconds + "s";
+        }
+        else { // if there is no data
+            playerNumE[i].textContent = i + 1;
+            playerE[i].textContent = "";
+            playerScoreE[i].textContent = "";
+            playerSecE[i].textContent = "";
+        }
+
+    }
 }
 
 // Pause Game
@@ -441,6 +441,7 @@ function exitGame(){
 }
 
 function showScore(){
+    displayScoreBoard()
     scoreModalE.style.display = "flex"
 }
 

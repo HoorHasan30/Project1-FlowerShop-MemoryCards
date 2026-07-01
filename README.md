@@ -7,21 +7,61 @@ The Floral Shop
 - JS
 
 ## Description
-- It is a memory card game that is in a flower shop theme, The player search for the matching cards to fill the shop vases
+**The Floral Shop** is a browser-based memory matching game with a cozy flower shop theme.
+
+Players flip two cards at a time to find matching flowers. Every successful match fills one of the flower shop's empty vases. The game is timed, so players must finish before the countdown ends.
+
+At the end of the game, players receive a star rating based on their performance:
+
+- ★★★ Complete all matches before the timer finishes.
+- ★★ Complete most matches.
+- ★ Complete some matches.
+- No stars if the score is too low.
+
+If the player earns **3 stars** and finishes with a faster time than one of the existing scores, they are prompted to enter their name and their score is saved using **Local Storage**.
+
+
+## Features
+- Memory card matching game
+- 45s countdown timer
+- Vase collection that updates after every match
+- Pause & resume
+- Local storage score board 
+- Stars Rating 
+
 
 ## User Stories
-- As a user I want to be able to flip 2 cards
-- As a user I want to be able to see the game timer
-- As a user I want to be able to see the vases that are collected
+- As a user, I want to flip two cards to find matching flower pairs.
+- As a user, I want to see a countdown timer while playing.
+- As a user, I want to watch the flower shop fill with vases as I make matches.
+- As a user, I want to pause and resume the game.
+- As a user, I want to see my final score and star rating.
+- As a user, I want my best score to appear on the score board if it qualifies.
 
 ## Screenshots
-![alt text](image.png)
+### Start Screen
+![alt text](image-1.png)
+### Gameplay
+![alt text](image-2.png)
+### Pause Game
+![alt text](image-3.png)
+### Time is Up!
+![alt text](image-8.png)
+### Try Next Time!
+![alt text](image-7.png)
+### Good Work!
+![alt text](image-6.png)
+### You Win!
+![alt text](image-4.png)
+### Enter Your Name
+
+### Score Board
+![alt text](image-5.png)
 
 
 ## Future Enhancements
-- A seperate modal for the win/lose with the time consumed and a "Play Again" button that appears when the game finishes, rather than showing on the same page 
-
-
+- Responsive Design
+- Difficulty Based Levels
 
 
 ## Credits
