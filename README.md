@@ -43,6 +43,8 @@ If the player earns **3 stars** and finishes with a faster time than one of the 
 ![alt text](image-1.png)
 ### Gameplay
 ![alt text](image-2.png)
+### Flipping Cards
+![alt text](image-6.png)
 ### Pause Game
 ![alt text](image-3.png)
 ### Time is Up!
@@ -50,7 +52,7 @@ If the player earns **3 stars** and finishes with a faster time than one of the 
 ### Try Next Time!
 ![alt text](image-7.png)
 ### Good Work!
-![alt text](image-6.png)
+![alt text](image-9.png)
 ### You Win!
 ![alt text](image-4.png)
 ### Enter Your Name
