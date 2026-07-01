@@ -422,7 +422,7 @@ function displayScoreBoard(scoreArray) {
         }
         else { // if there is no data
             playerNumE[i].textContent = i + 1;
-            playerE[i].textContent = "Anonymous";
+            playerE[i].textContent = "";
             playerScoreE[i].textContent = "";
             playerSecE[i].textContent = "";
         }
