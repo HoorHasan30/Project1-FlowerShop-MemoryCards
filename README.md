@@ -40,25 +40,25 @@ If the player earns **3 stars** and finishes with a faster time than one of the 
 
 ## Screenshots
 ### Start Screen
-![alt text](image-1.png)
+![alt text](./assets/sreenshots/image-1.png)
 ### Gameplay
-![alt text](image-2.png)
-### Flipping Cards
-![alt text](image-6.png)
+![alt text](./assets/sreenshots/image-2.png)
 ### Pause Game
-![alt text](image-3.png)
+![alt text](./assets/sreenshots/image-3.png)
+### Flipping Cards
+![alt text](./assets/sreenshots/image-6.png)
 ### Time is Up!
-![alt text](image-8.png)
+![alt text](./assets/sreenshots/image-8.png)
 ### Try Next Time!
-![alt text](image-7.png)
+![alt text](./assets/sreenshots/image-7.png)
 ### Good Work!
-![alt text](image-9.png)
+![alt text](./assets/sreenshots/image-9.png)
 ### You Win!
-![alt text](image-4.png)
+![alt text](./assets/sreenshots/image-4.png)
 ### Enter Your Name
-
+![alt text](./assets/sreenshots/imagee.png)
 ### Score Board
-![alt text](image-5.png)
+![alt text](./assets/sreenshots/imageee.png)
 
 
 ## Future Enhancements

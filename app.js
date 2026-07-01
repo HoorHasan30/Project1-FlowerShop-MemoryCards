@@ -31,6 +31,10 @@ const playerSecE = document.querySelectorAll(".score-sec")
 const scoreModalE = document.querySelector("#score-modal")
 const exitScoreE = document.querySelector("#exit-modal-btn")
 
+// Name modal
+const nameModalE = document.querySelector("#name-modal")
+const nameInputE = document.querySelector("#name")
+const saveBtnE = document.querySelector("#save")
 
 // haeder 
 const timeE = document.querySelector("#time")
@@ -98,21 +102,26 @@ let numOfSeconds
 
 let winner = false
 
+let winnerName
+
 /*-------------------------------- Functions --------------------------------*/
-function init(){
+function init() {
     startModalE.style.display = "flex"
 
     scoreModalE.style.display = "none"
     endModalE.style.display = "none"
+
+    nameModalE.style.display = "none"
 }
 
 function startGame() {
 
     // hide all modals
     startModalE.style.display = "none"
-    endModalE.style.display = "none" 
-    pauseModalE.style.display = "none" 
+    endModalE.style.display = "none"
+    pauseModalE.style.display = "none"
     scoreModalE.style.display = "none"
+    nameModalE.style.display = "none"
 
     initGame() // call game init
 }
@@ -139,7 +148,7 @@ function initGame() {
     startModalE.style.display = "none"
     endModalE.style.display = "none" // hide the modal
     pauseModalE.style.display = "none" //hide the modal
-    
+
     getCards()
     startTimer()
 }
@@ -270,7 +279,7 @@ function checkForMatch(event) {
                 secondCard = null
                 canFlip = true
             }
-            ,500
+            , 500
         )
     }
 }
@@ -297,24 +306,21 @@ function checkForWin() {
     // check if the matches == 6 -> winner = true, call updateMsg()
     if (matchs == 6) {
         winner = true
+        nameModalE.style.display = "flex" // show get name model
         showEndingModal()
     }
 }
+
 
 function showEndingModal() {
     numOfSeconds = 45 - seconds
     clearInterval(timerInterval) // stop the timer
 
-    if (winner){
+    if (winner) {
         stateE.textContent = "You Win!"
         stateE.style.color = "rgb(62, 125, 52)"
 
         starsE.textContent = "★★★"
-        
-        if(checkIfHighScore){
-        addToScoreBoard()
-
-        }
 
         matchesE.textContent = matchs
         secE.textContent = numOfSeconds
@@ -347,72 +353,87 @@ function showEndingModal() {
             matchesE.textContent = matchs
             secE.textContent = numOfSeconds
         }
+
+        endModalE.style.display = "flex"
     }
 
     pauseBtnE.disabled = true
     canFlip = false
-    endModalE.style.display = "flex"
 }
 
-function checkIfHighScore(){
+function checkIfHighScore() {
 
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) // create an array for the leaderboard objects
-    const isHighScore = leaderboard.some((score)=>{numOfSeconds > score.seconds}) // check if the player score is hogher than any score in the array
+    const isHighScore = leaderboard.some((score) => { numOfSeconds > score.seconds }) // check if the player score is hogher than any score in the array
     console.log(`made leaderboard ${isHighScore}`) // true if higher than a score, falsr if lower 
 
     return isHighScore
 }
 
-function addToScoreBoard(){ // called only if player made it to the leaderboard
+function addToScoreBoard() { // called only if player made it to the leaderboard
+    getName() //get player name
 
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) //get the leaderboard array
-    let name = prompt('Give your name') // prompt player to enter his name
 
     // add the players score into the array
     leaderboard.push({
-        name,
+        name: winnerName,
         seconds: numOfSeconds,
         matches: matchs
     })
 
-    leaderboard.sort((a,b) => a.seconds - b.seconds) // sort from higest to lowest
-    if(leaderboard.lenngth >= 5) leaderboard.pop() // remove the last element (keep only 5 in the array)
+    leaderboard.sort((a, b) => a.seconds - b.seconds) // sort from higest to lowest
+    if (leaderboard.length >= 5) leaderboard.pop() // remove the last element (keep only 5 in the array)
 
     console.log("NEW High scores " + leaderboard)
 
-    localStorage.setItem('leaderboard',JSON.stringify(leaderboard)) // add array to localStorage
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard)) // add array to localStorage
 
     // display higest 5 scores that have the least numOfSeconds
-    displayScoreBoard()
+    displayScoreBoard(leaderboard)
 
+    nameModalE.style.display = "none"
+    endModalE.style.display = "flex"
 }
 
-function displayScoreBoard(){
 
-    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) //get the leaderboard array
-    leaderboard.sort((a,b) => a.seconds - b.seconds)
+function getName() {
+    winnerName = nameInputE.value // assign the input to winnerName
 
+    nameInputE.value = "" // clear value
+    console.log(nameInputE.value)
+
+    return nameInputE.value // return name
+}
+
+function displayScoreBoard(scoreArray) {
     // looping through the array to display
-    for (let i = 0; i < 5; i++){
+    for (let i = 0; i < 5; i++) {
 
-        if (leaderboard[i]) { // if there is a data in the leaderboard for the index
+        if (scoreArray[i]) { // if there is a data in the leaderboard for the index
             playerNumE[i].textContent = i + 1;
-            playerE[i].textContent = leaderboard[i].name;
-            playerScoreE[i].textContent = leaderboard[i].matches + "/6";
-            playerSecE[i].textContent = leaderboard[i].seconds + "s";
+            playerE[i].textContent = scoreArray[i].name;
+            playerScoreE[i].textContent = scoreArray[i].matches + "/6";
+            playerSecE[i].textContent = scoreArray[i].seconds + "s";
         }
         else { // if there is no data
             playerNumE[i].textContent = i + 1;
-            playerE[i].textContent = "";
+            playerE[i].textContent = "Anonymous";
             playerScoreE[i].textContent = "";
             playerSecE[i].textContent = "";
         }
-
     }
 }
 
+// score board
+function showScore() {
+    displayScoreBoard(JSON.parse(localStorage.getItem('leaderboard')))
+    nameModalE.style.display = "none"
+    scoreModalE.style.display = "flex"
+}
+
 // Pause Game
-function showPauseModal(){
+function showPauseModal() {
     //stop the timer
     clearInterval(timerInterval)
 
@@ -420,7 +441,7 @@ function showPauseModal(){
     pauseModalE.style.display = "flex"
 }
 
-function resumeGame(){
+function resumeGame() {
     //resume the timer
     startTimer()
 
@@ -428,7 +449,7 @@ function resumeGame(){
     pauseModalE.style.display = "none"
 }
 
-function exitGame(){
+function exitGame() {
     // stop timer
     clearInterval(timerInterval)
 
@@ -440,12 +461,7 @@ function exitGame(){
     startModalE.style.display = "flex"
 }
 
-function showScore(){
-    displayScoreBoard()
-    scoreModalE.style.display = "flex"
-}
-
-function exitScore(){
+function exitScore() {
     scoreModalE.style.display = "none"
 }
 
@@ -462,7 +478,10 @@ exitGameBtn.addEventListener('click', exitGame)
 scoreBtn.forEach(
     btn => btn.addEventListener('click', showScore)
 )
+
 exitScoreE.addEventListener('click', exitScore)
+
+saveBtnE.addEventListener('click', addToScoreBoard)
 
 resetE.addEventListener('click', init)
 
