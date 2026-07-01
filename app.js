@@ -112,6 +112,10 @@ function init() {
     endModalE.style.display = "none"
 
     nameModalE.style.display = "none"
+
+    if(!JSON.parse(localStorage.getItem("leaderboard"))){
+        localStorage.setItem('leaderboard',JSON.stringify([]))
+    }
 }
 
 function startGame() {
