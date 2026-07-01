@@ -239,7 +239,7 @@ function flipCard(event) {
 // called after each 2 flips , if match -> update the vase 
 function checkForMatch(event) {
 
-    console.log('check function')
+    // console.log('check function')
     // check if both have the same img 
     // if so -> keep flipped, match++, canFlip = true, reset cards, show the vase that have the same type of flowers, call checkForWin
     let firstCardBack = firstCard.children[1]
@@ -249,8 +249,8 @@ function checkForMatch(event) {
     let secImg = secondCard.children[1].children[0].src
 
     if (firstImg == secImg) {
-        console.log('in if')
-        console.log(firstImg)
+        // console.log('in if')
+        // console.log(firstImg)
         setTimeout(
             () => {
                 firstCardBack.classList.add("matched")
@@ -272,7 +272,7 @@ function checkForMatch(event) {
     }
     // if not -> re-flip the card, canFlip = true, reset cards
     else {
-        console.log('else')
+        // console.log('else')
         setTimeout(
             () => {
                 // re-flip the cards
@@ -294,11 +294,11 @@ function showVase(img) {
 
     let vaseSrc = `./assets/vases/V${flower}` // set the vase src
 
-    console.log(flower)
-    console.log(vaseSrc)
+    // console.log(flower)
+    // console.log(vaseSrc)
 
     let vaseImgIndex = vases.indexOf(vaseSrc); // find the vaseSrc exist in the array of vases
-    console.log(vaseImgIndex)
+    // console.log(vaseImgIndex)
     if (vaseImgIndex !== null || vaseImgIndex !== undefined) { // if exist
         vasesElement[vaseImgIndex].src = vaseSrc // take the 
     }
@@ -369,7 +369,7 @@ function checkIfHighScore() {
 
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) // create an array for the leaderboard objects
     const isHighScore = leaderboard.some((score) => { numOfSeconds > score.seconds }) // check if the player score is hogher than any score in the array
-    console.log(`made leaderboard ${isHighScore}`) // true if higher than a score, falsr if lower 
+    //console.log(`made leaderboard ${isHighScore}`) // true if higher than a score, false if lower 
 
     return isHighScore
 }
@@ -389,7 +389,7 @@ function addToScoreBoard() { // called only if player made it to the leaderboard
     leaderboard.sort((a, b) => a.seconds - b.seconds) // sort from higest to lowest
     if (leaderboard.length >= 5) leaderboard.pop() // remove the last element (keep only 5 in the array)
 
-    console.log("NEW High scores " + leaderboard)
+    // console.log("NEW High scores " + leaderboard)
 
     localStorage.setItem('leaderboard', JSON.stringify(leaderboard)) // add array to localStorage
 
@@ -405,7 +405,7 @@ function getName() {
     winnerName = nameInputE.value // assign the input to winnerName
 
     nameInputE.value = "" // clear value
-    console.log(nameInputE.value)
+    // console.log(nameInputE.value)
 
     return nameInputE.value // return name
 }

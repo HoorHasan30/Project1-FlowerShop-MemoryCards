@@ -1,6 +1,9 @@
 # Project Name
 The Floral Shop
 
+## Getting started
+[Click Here To Play!](https://hoorhasan30.github.io/Project1-FlowerShop-MemoryCards/)
+
 ## Technologies Used
 - HTML
 - CSS
